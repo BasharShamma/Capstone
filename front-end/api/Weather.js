@@ -27,6 +27,17 @@ const Weather = async ({ latitude, longitude }) => {
     
   }
 
+  return (
+    <div>
+      {weatherData && (
+        <div>
+          <p>Current Temperature:</p>
+          {/* Add other weather information here */}
+        </div>
+      )}
+    </div>
+  );
+
 };
 
 export default Weather;
