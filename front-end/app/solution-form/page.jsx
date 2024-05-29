@@ -37,7 +37,6 @@ const SolutionForm = () => {
   const [windSpeed, setWindSpeed] = useState(null);
   const [useDefaultSettings, setUseDefaultSettings] = useState(true);
   const [showGasBillInput, setShowGasBillInput] = useState(false);
-  const router = useRouter();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
@@ -171,9 +170,9 @@ const SolutionForm = () => {
           <img src="./AirBreeze.png" />
         </div>
       ),
-      BERGEYexcel6: (
+      BergeyExcel1kW: (
         <div className="flex flex-col items-center justify-center">
-          <img src="./BERGEY excel 6.png" />
+          <img src="./bergey.png" />
         </div>
       ),
       BattleBornBattery: (
@@ -191,9 +190,15 @@ const SolutionForm = () => {
           <img src="./trojanBattery.png" />
         </div>
       ),
-      Whisper100: (
+      SD66kW: (
         <div className="flex flex-col items-center justify-center">
-          <img src="./whisper-100.png" />
+          <img src="./sd6.png" />
+        </div>
+      ),
+
+      Skystream37: (
+        <div className="flex flex-col items-center justify-center">
+          <img src="./skystream.png" />
         </div>
       ),
 
@@ -328,8 +333,8 @@ const SolutionForm = () => {
 
     const result = await generateSolution(output);
     localStorage.setItem("result", JSON.stringify(result));
-    router;
-    router.push("solution");
+
+    // router.push("solution");
     console.log(result);
     if (error) {
       console.log("Form contains errors.");
@@ -786,7 +791,68 @@ const SolutionForm = () => {
                 </div>
               )}
 
-              <div className="flex items-center mb-4 mr-3">
+<div className="flex mb-4 pt-4 pl-2 pr-44">
+                <p className="font-semibold">Roof Type:</p>
+                <div className="flex items-center mx-8">
+                  <input
+                    type="checkbox"
+                    id="straight"
+                    name="roof_type"
+                    checked={formData.roof_type === "Slope"}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label className="ml-2">Slope</label>
+                  <div
+                    className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
+                    onClick={() => handleInfoClick("Slope")}
+                    title="Click for more info on Slope Type"
+                  >
+                    ?
+                  </div>
+                </div>
+
+                <div className="flex items-center mx-8">
+                  <input
+                    type="checkbox"
+                    id="straight"
+                    name="roof_type"
+                    value="Flat"
+                    checked={formData.roof_type === "Flat"}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label className="ml-2">Flat</label>
+                  <div
+                    className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
+                    onClick={() => handleInfoClick("Flat")}
+                    title="Click for more info on Flat Type"
+                  >
+                    ?
+                  </div>
+                </div>
+
+                <div className="flex items-center mx-8">
+                  <input
+                    type="checkbox"
+                    id="curved"
+                    name="roof_type"
+                    value="Composite"
+                    checked={formData.roof_type === "Composite"}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label className="ml-2">Composite</label>
+                  <div
+                    className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
+                    onClick={() => handleInfoClick("Composite")}
+                    title="Click for more info on Composite Type"
+                  >
+                    ?
+                  </div>
+                </div>
+              </div>
+
+                 
+
+              <div className="flex items-center my-4 mr-3">
                 <p className="font-semibold">Solution Type:</p>
                 <div className="flex">
                   <div className="flex mx-8">
@@ -1011,68 +1077,7 @@ const SolutionForm = () => {
                   </div>
                 </div>
               )}
-              <div className="flex mb-4 pt-4 pl-40 pr-2">
-                <p className="font-semibold">Roof Type:</p>
-                <div className="flex items-center mx-8">
-                  <input
-                    type="checkbox"
-                    id="straight"
-                    name="roof_type"
-                    value="Slope"
-                    disabled={useDefaultSettings}
-                    checked={formData.roof_type === "Slope"}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label className="ml-2">Slope</label>
-                  <div
-                    className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
-                    onClick={() => handleInfoClick("Slope")}
-                    title="Click for more info on Slope Type"
-                  >
-                    ?
-                  </div>
-                </div>
-
-                <div className="flex items-center mx-8">
-                  <input
-                    type="checkbox"
-                    id="straight"
-                    name="roof_type"
-                    value="Flat"
-                    disabled={useDefaultSettings}
-                    checked={formData.roof_type === "Flat"}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label className="ml-2">Flat</label>
-                  <div
-                    className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
-                    onClick={() => handleInfoClick("Flat")}
-                    title="Click for more info on Flat Type"
-                  >
-                    ?
-                  </div>
-                </div>
-
-                <div className="flex items-center mx-8">
-                  <input
-                    type="checkbox"
-                    id="curved"
-                    name="roof_type"
-                    value="Composite"
-                    disabled={useDefaultSettings}
-                    checked={formData.roof_type === "Composite"}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label className="ml-2">Composite</label>
-                  <div
-                    className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
-                    onClick={() => handleInfoClick("Composite")}
-                    title="Click for more info on Composite Type"
-                  >
-                    ?
-                  </div>
-                </div>
-              </div>
+              
 
               <div className="flex mb-4 pt-4">
                 <p className="font-semibold">Grid Type:</p>
@@ -1124,16 +1129,16 @@ const SolutionForm = () => {
                     <div className="flex items-center mx-8">
                       <input
                         type="checkbox"
-                        id="BYD B-Box HV 12.8 kWh"
+                        id="surretteBattery"
                         name="wind_battery"
-                        value="BYD B-Box HV 12.8 kWh"
+                        value="surretteBattery"
                         disabled={useDefaultSettings}
-                        checked={
-                          formData.wind_battery === "BYD B-Box HV 12.8 kWh"
-                        }
+                        checked={formData.wind_battery === "surretteBattery"}
                         onChange={handleCheckboxChange}
                       />
-                      <label className="ml-2">BYD B-Box HV 12.8 kWh </label>
+                      <label className="ml-2">
+                        Surrette Rolls S6 L16-HC (S-550) 445Ah 6V Deep Cycle{" "}
+                      </label>
                       <div
                         className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
                         onClick={() => handleInfoClick("surretteBattery")}
@@ -1146,26 +1151,41 @@ const SolutionForm = () => {
                     <div className="flex items-center mx-8">
                       <input
                         type="checkbox"
-                        id="Trojan T-105 Plus 6V Deep-Cycle Flooded Lead-Acid Battery"
+                        id="trojanBattery"
                         name="wind_battery"
-                        value="Trojan T-105 Plus 6V Deep-Cycle Flooded Lead-Acid Battery"
+                        value="trojanBattery"
                         disabled={useDefaultSettings}
-                        checked={
-                          formData.wind_battery ===
-                          "Trojan T-105 Plus 6V Deep-Cycle Flooded Lead-Acid Battery"
-                        }
+                        checked={formData.wind_battery === "trojanBattery"}
                         onChange={handleCheckboxChange}
                       />
                       <label className="ml-2">
-                        Trojan Battery Trojan T-125 6V 240Ah Deep Cycle
+                        Trojan Battery Trojan T-125 6V 240Ah Deep Cycle{" "}
                       </label>
                       <div
                         className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
-                        onClick={() =>
-                          handleInfoClick(
-                            "Trojan T-105 Plus 6V Deep-Cycle Flooded Lead-Acid Battery"
-                          )
-                        }
+                        onClick={() => handleInfoClick("trojanBattery")}
+                        title="Click for more info on battery type"
+                      >
+                        ?
+                      </div>
+                    </div>
+                    <div className="flex items-center mx-8">
+                      <input
+                        type="checkbox"
+                        id="BattleBornBattery"
+                        name="wind_battery"
+                        value="BattleBornBattery"
+                        disabled={useDefaultSettings}
+                        checked={formData.wind_battery === "BattleBornBattery"}
+                        onChange={handleCheckboxChange}
+                      />
+                      <label className="ml-2">
+                        Battle Born Battery BB250-12V 100Ah Lithium Iron
+                        Phosphate (LiFePO4){" "}
+                      </label>
+                      <div
+                        className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
+                        onClick={() => handleInfoClick("BattleBornBattery")}
                         title="Click for more info on battery type"
                       >
                         ?
@@ -1225,14 +1245,16 @@ const SolutionForm = () => {
                   <div className="flex items-center mx-8">
                     <input
                       type="checkbox"
-                      id="MultiPlus 5kVA 48V"
+                      id="type3"
                       name="inverter_type"
-                      value="MultiPlus 5kVA 48V"
+                      value="type3"
                       disabled={useDefaultSettings}
-                      checked={formData.inverter_type === "MultiPlus 5kVA 48V"}
+                      checked={formData.inverter_type === "type3"}
                       onChange={handleCheckboxChange}
                     />
-                    <label className="ml-2">MultiPlus 5kVA 48V </label>
+                    <label className="ml-2">
+                      Schneider Electric Conext SW+ 5000W{" "}
+                    </label>
                     <div
                       className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
                       onClick={() => handleInfoClick("inverter3")}
@@ -1245,14 +1267,16 @@ const SolutionForm = () => {
                   <div className="flex items-center mx-8">
                     <input
                       type="checkbox"
-                      id="AALGO 2400w"
+                      id="PVI-6000w Power-One Aurora"
                       name="inverter_type"
-                      value="AALGO 2400w"
+                      value="PVI-6000w Power-One Aurora"
                       disabled={useDefaultSettings}
-                      checked={formData.inverter_type === "AALGO 2400w"}
+                      checked={
+                        formData.inverter_type === "PVI-6000w Power-One Aurora"
+                      }
                       onChange={handleCheckboxChange}
                     />
-                    <label className="ml-2">AALGO 2400w</label>
+                    <label className="ml-2">PVI-6000w Power-One Aurora</label>
                     <div
                       className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
                       onClick={() => handleInfoClick("inverter4")}
@@ -1265,37 +1289,18 @@ const SolutionForm = () => {
                   <div className="flex items-center mx-8">
                     <input
                       type="checkbox"
-                      id="AIMS Power Inverter"
+                      id="Marsrock 1000W 1KW MPPT Wind Grid Tie"
                       name="inverter_type"
-                      value="AIMS Power Inverter"
-                      disabled={useDefaultSettings}
-                      checked={formData.inverter_type === "AIMS Power Inverter"}
-                      onChange={handleCheckboxChange}
-                    />
-                    <label className="ml-2">AIMS Power Inverter </label>
-                    <div
-                      className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
-                      onClick={() => handleInfoClick("inverter5")}
-                      title="Click for more info on inverter types"
-                    >
-                      ?
-                    </div>
-                  </div>
-                  <div className="flex items-center mx-8">
-                    <input
-                      type="checkbox"
-                      id="KRXNY 1000W Pure Sine Wave Power Inverter"
-                      name="inverter_type"
-                      value="KRXNY 1000W Pure Sine Wave Power Inverter"
+                      value="Marsrock 1000W 1KW MPPT Wind Grid Tie"
                       disabled={useDefaultSettings}
                       checked={
                         formData.inverter_type ===
-                        "KRXNY 1000W Pure Sine Wave Power Inverter"
+                        "Marsrock 1000W 1KW MPPT Wind Grid Tie"
                       }
                       onChange={handleCheckboxChange}
                     />
                     <label className="ml-2">
-                      KRXNY 1000W Pure Sine Wave Power Inverter{" "}
+                      Marsrock 1000W 1KW MPPT Wind Grid Tie
                     </label>
                     <div
                       className="flex h-6 w-6 items-center justify-center text-xs bg-gray-200 rounded-full ml-2 cursor-pointer"
